@@ -9,6 +9,7 @@
     --orange: #D4A373;
     font-family: 'Merriweather', serif;
 }
+
 h1 {
     margin: 0;
     font-size: 6rem;
@@ -31,6 +32,7 @@ header {
 }
 
 .main-grid-container {
+    position: relative;
     flex: 1;
     height: 100vh;
     display: grid;
@@ -41,20 +43,28 @@ header {
 /* left */
 
 .left-container {
+    position: relative;
     background-color: var(--light-green);
     grid-column: 1;
     text-align: left;
-    padding: 1rem;
+    padding: 0rem 1rem;
     color: var(--dark-green);
+}
+
+.sticky {
+    position: sticky;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 4rem;
+    top: 0;
 }
+
 
 .addcard-form {
     font-size: 2rem;
-    margin-bottom: 10rem;
+    margin-top: 2rem;
+    margin-bottom: 15rem;
 }
 
 .addcard-form input {
