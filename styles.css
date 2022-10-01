@@ -17,6 +17,8 @@ h2 {
 }
 
 body {
+    position: relative;
+    display: flex;
 }
 
 header {
@@ -27,9 +29,10 @@ header {
 }
 
 .main-grid-container {
+    flex: 1;
     height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 10fr;
 }
 
 
@@ -41,10 +44,52 @@ header {
     text-align: left;
     padding: 1rem;
     color: var(--dark-green);
-    font-size: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 4rem;
 }
 
+.addcard-form {
+    font-size: 2rem;
+    margin-bottom: 10rem;
+}
 
+.addcard-form input {
+    border: 0.2rem var(--dark-green) solid;
+    background-color: transparent;
+    color: var(--dark-green);
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+}
+
+input:focus {
+    border: 0.2rem white solid;
+    outline: none;
+}
+
+.menu {
+    align-self: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.btn{
+    background-color: transparent;
+    border: none;
+    border-radius: 1rem;
+    color: var(--dark-green);
+}
+
+.btn:hover {
+    color: white;
+}
+
+.addcard-form {
+    height: 4rem;
+}
 
 /* right */
 
@@ -59,16 +104,6 @@ header {
     
 }
 
-.btn-reset {
-    background-color: transparent;
-    border: none;
-    border-radius: 1rem;
-    color: var(--medium-brown);
-}
-
-.btn-reset:hover {
-    color: white;
-}
 
 .bookshelf-grid {
     height: 80%;
@@ -76,19 +111,43 @@ header {
     background-color: var(--medium-brown);
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fit , minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit , minmax(240px, 1fr));
     padding: 2rem;
 }
 
 .book-card {
+    position: relative;
+    transition: all .2s ease-in-out;
     background-color: #D4A373;
     border-right: white 1rem solid;
+    border-bottom: white 0.5rem solid;
+    border-radius: 1rem 0 0 0;
     color: white;
     height: 15rem;
     width: 15rem;
     padding: 1rem;
     display: flex;
     flex-direction: column;
+    box-shadow: 8px 8px 5px -8px black;
+}
+
+.btn-deletebook {
+    display: none;
+    position: relative;
+    top: -1rem;
+    left: -1rem;
+    border: none;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.btn-deletebook-hover {
+    display: block;
+}
+
+.book-card:hover {
+    transform: scale(1.1);
 }
 
 .card-author {
@@ -100,8 +159,21 @@ header {
     flex: 1;
 }
 
-
 .card-bottom {
     display: flex;
     justify-content: space-between;
+}
+
+.side-container {
+    display: none;
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    width: 20rem;
+    height: 100%;
+    background-color: var(--orange);
+}
+
+.side-open {
+    display: block;
 }
