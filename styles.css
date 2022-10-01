@@ -1,0 +1,107 @@
+*, *::before, *::after { box-sizing: border-box; padding: 0; margin: 0;}
+
+:root {
+    --dark-green: #CCD5AE;
+    --light-green: #E9EDC9;
+    --light-brown: #FEFAE0;
+    --medium-brown: #FAEDCD;
+    --orange: #D4A373;
+}
+h1 {
+    margin: 0;
+    font-size: 6rem;
+}
+
+h2 {
+    font-size: 3rem;
+}
+
+body {
+}
+
+header {
+    grid-column: 1 / 3;
+    background-color: var(--dark-green);
+   
+    
+}
+
+.main-grid-container {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+
+/* left */
+
+.left-container {
+    background-color: var(--light-green);
+    grid-column: 1;
+    text-align: left;
+    padding: 1rem;
+    color: var(--dark-green);
+    font-size: 8rem;
+}
+
+
+
+/* right */
+
+
+.right-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: var(--medium-brown);
+    background-color: var(--light-brown);
+    
+}
+
+.btn-reset {
+    background-color: transparent;
+    border: none;
+    border-radius: 1rem;
+    color: var(--medium-brown);
+}
+
+.btn-reset:hover {
+    color: white;
+}
+
+.bookshelf-grid {
+    height: 80%;
+    width: 100%;
+    background-color: var(--medium-brown);
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit , minmax(200px, 1fr));
+    padding: 2rem;
+}
+
+.book-card {
+    background-color: #D4A373;
+    border-right: white 1rem solid;
+    color: white;
+    height: 15rem;
+    width: 15rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-author {
+    font-size: 1.5rem;
+}
+
+.card-bookname {
+    font-size: 2rem;
+    flex: 1;
+}
+
+
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+}
