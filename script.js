@@ -10,31 +10,50 @@ function Book(title, author, pages, read) {
     }
 }
 
+Book.prototype.changeReadStatus = function (){
+    this.read == true ? false : true;
+}
+
 function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
-let sample = new Book('Guerra dos Tronos', 'GRRM', 100, true);
-let sample2 = new Book('Tormenta de espadas', 'GRRM', 200, false);
 
-
-
-
-addBookToLibrary(sample);
-addBookToLibrary(sample2);
-
+// let sample = new Book('Guerra dos Tronos', 'GRRM', 100, true);
+// let sample2 = new Book('Tormenta de espadas', 'GRRM', 200, false);
+// addBookToLibrary(sample);
+// addBookToLibrary(sample2);
 
 // DOM
+function getRandomColor() {
+    var randomColor = Math.floor(Math.random()*16777215).toString(16);
+    return '#' + randomColor;
+}
 function getFormInput() {
-    
+    const form = document.querySelector('.addcard-form');
+    let input = [
+        form[0].value,
+        form[1].value,
+        form[2].value,
+        form[3].checked ? true : false
+    ];
+    return input
 }
 
-
+function makeBook(array){
+    return new Book(array[0], array[1], array[2], array[3]);
+}
 
 function makeBookCard(book) {
 
     const bookcard = document.createElement('div');
     bookcard.classList.add('book-card')
+    bookcard.style.backgroundColor = getRandomColor();
+
+    const bookDeleteBook = document.createElement('button');
+    bookDeleteBook.textContent = 'X';
+    bookDeleteBook.classList.add('btn-deletebook');
+    bookcard.appendChild(bookDeleteBook);
 
     const bookAuthor = document.createElement('span');
     bookAuthor.textContent = book.author
@@ -50,12 +69,12 @@ function makeBookCard(book) {
     bookBottom.classList.add('card-bottom');
 
     const bookPages = document.createElement('span');
-    bookPages.textContent = book.pages;
+    bookPages.textContent = "Pages: " + book.pages;
     bookPages.classList.add('card-pages')
 
-    const bookRead = document.createElement('span');
+    const bookRead = document.createElement('button');
     bookRead.textContent = book.read ? 'READED' : 'NOT READED';
-    bookRead.classList.add('card-read')
+    bookRead.classList.add('card-read', 'btn-read')
 
     bookBottom.append(bookPages, bookRead);
     bookcard.appendChild(bookBottom);
@@ -64,37 +83,51 @@ function makeBookCard(book) {
 }
 
 
+const bookshelf = document.querySelector('.bookshelf-grid')
 
 
-function startLibrary() {
-    const bookshelf = document.querySelector('.bookshelf-grid')
-    
+function startLibrary() {    
     myLibrary.forEach(book => {
         const bookcard = makeBookCard(book);
         bookshelf.appendChild(bookcard);
     });
 }
 
-startLibrary(); 
+function resetLibrary() {
+    myLibrary = [];
+    bookshelf.innerHTML = '';
+    startLibrary();
+}
 
+function changeRead(e){
+    if ( e.textContent === 'READED' ){
+        e.textContent = 'NOT READED';
+    } else {
+        e.textContent = 'READED'
+    }
+}
 
-// Buttons
+function addCardToBookshelf() {
+    const array = getFormInput();
+    const book = makeBook(array);
+    const bookcard = makeBookCard(book);
+    bookcard.addEventListener('mouseenter', () => bookcard.firstElementChild.classList.toggle('btn-deletebook-hover'));
+    bookcard.addEventListener('mouseleave', () => bookcard.firstElementChild.classList.toggle('btn-deletebook-hover'));
+    bookcard.firstElementChild.addEventListener('click', () => bookcard.remove());
+    bookcard.lastElementChild.lastElementChild.addEventListener('click', () => changeRead(bookcard.lastElementChild.lastElementChild));
+    bookshelf.appendChild(bookcard);
+}
 
-
-
-// Side Bar-- maybe use later idk
-
-// const sideBar = document.querySelector('.side-container')
-// const startButton = document.querySelector('.btn-add');
-
-// startButton.addEventListener('click', () => sideBar.classList.contains('side-open') ? sideBar.classList.remove('side-open') : sideBar.classList.add('side-open'));
-
+// menu button
 const startButton = document.querySelector('.btn-add');
-startButton.addEventListener('click', () => getFormInput())
+startButton.addEventListener('click', () => addCardToBookshelf());
+const resetButton = document.querySelector('.btn-reset');
+resetButton.addEventListener('click', () => resetLibrary());
+
+startLibrary();
 
 
 
-const cards = document.querySelectorAll('.book-card');
-const btnDel = document.querySelectorAll('button');
-console.log(btnDel);
-cards.forEach(e => e.addEventListener('mouseenter', btnDel.classList.add('btn-deletebook-hover'))); 
+
+
+
