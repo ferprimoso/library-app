@@ -1,4 +1,5 @@
 *, *::before, *::after { box-sizing: border-box; padding: 0; margin: 0;}
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
 
 :root {
     --dark-green: #CCD5AE;
@@ -6,6 +7,7 @@
     --light-brown: #FEFAE0;
     --medium-brown: #FAEDCD;
     --orange: #D4A373;
+    font-family: 'Merriweather', serif;
 }
 h1 {
     margin: 0;
